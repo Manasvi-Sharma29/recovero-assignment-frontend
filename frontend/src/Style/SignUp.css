@@ -1,0 +1,55 @@
+h1{
+    margin-top: 20px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:dimgrey;
+}
+.brand-home{
+    font-size: large;
+}
+#inputTitle{
+    width:20%;
+    margin-top: 50px;
+}
+/* name */
+#inputName{
+    margin-left: -290px;
+    width:50%
+}
+/* phone */
+#inputPhone{
+    width:50%;
+    margin-left: 115px;
+}
+/* email */
+#inputEmail4{
+    width: 50%;
+    margin-top: 15px;
+    margin-left: 115px;
+}
+/* password */
+#inputPassword4{
+    width:50%;
+    margin-left: 115px;
+}
+/* street */
+#inputRole{
+    width: 50%;
+    margin-left: 115px;
+}
+
+#submitBtn{
+    margin-top: 15px;
+    margin-left: 220px;
+   color:whitesmoke;
+   background-color: dimgrey;
+   border: 0;
+}
+.form-group{
+    display: inline-block;
+}
+.form-group{
+    margin-top: 15px;
+}
+form{
+    margin-left: 5%;
+}

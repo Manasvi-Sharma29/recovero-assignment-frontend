@@ -1,0 +1,27 @@
+#login{
+    margin-top: 20px;
+    /* text-align: center; */
+    margin-left: 550px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:dimgrey;
+}
+.loginInput{
+    margin-top: 130px;
+}
+#InputEmail{
+    margin-left: 445px;
+    width:50%;
+}
+
+#InputPassword{
+    margin-left: 445px;
+    width:50%;
+}
+
+.btn{
+    margin-top: 15px;
+    margin-left: 565px;
+   color:whitesmoke;
+   background-color: dimgrey;
+   border: 0;
+}

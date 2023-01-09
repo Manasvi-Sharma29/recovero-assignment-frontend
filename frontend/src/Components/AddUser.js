@@ -1,40 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
+import {useNavigate, useParams} from "react-router-dom"
+import axios from "axios"
+import "../Style/AddUser.css"
+
+
 
 export default function AddUser() {
+    // const {adminId} = useParams()
     const [title, setTitle] = useState("");
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("");
+    const [memberList, setMemberList] = useState([]);
+    const navigate = useNavigate()
+
+    const ViewMembers = async()=> {
+      let adminId = JSON.parse(localStorage.getItem("adminid"));
+      let obj = {
+        url: `http://localhost:5000/getUsers/${adminId}`,
+        method: "get",
+        headers: {
+          authorization: JSON.parse(localStorage.getItem("token")),
+        },
+      };
+    
+      let result = await axios(obj)
+      if(result){
+        console.log(result.data.data)
+        setMemberList(result.data.data)
+      }else{
+        alert('no member exist')
+      }
+    }
+
     const collectData = async ()=>{
+        let adminId = JSON.parse(localStorage.getItem("adminid"))
         console.warn(title,name,phone,email,password,role)
         let obj = {
             method:'post',
-            url:'http://localhost:5000/createUser/:admin',
+            url:`http://localhost:5000/createUser/${adminId}`,
             data:{
                 title,name,phone,email,password,role
+            },
+            headers:{
+              authorization: JSON.parse(localStorage.getItem('token'))
             }
         }
-        const result = await axios(obj)
-        console.log(result.data)
-        localStorage.setItem("user",JSON.stringify(result))
-        if(result){
-          navigate('/')
-        }
-        // let result = await fetch('http://localhost:5000/register',{
-        //   method:'post',
-        //   body:JSON.stringify({title,name,phone,email,password,street,city,pincode}),
-        //   headers:{
-        //     'Content-Type':'application/json'
-        //   }
-        // })
-        // result = await result.json()
-        // console.warn(result)
+        let result = await axios(obj)
+        result = result.data.data
+        console.log(result)
+          ViewMembers()
+    }
+
+    const DeleteUser = async function (userId){
+      let adminId = JSON.parse(localStorage.getItem("adminid"))
+      let obj = {
+          method:'delete',
+          url:`http://localhost:5000/deleteUser/${adminId}/${userId}`,
+          headers:{
+            authorization: JSON.parse(localStorage.getItem('token'))
+          }
       }
+      let result = await axios(obj)
+      if (result){
+         
+          ViewMembers()
+      }
+  }
       return (
+        <>
         <form>
-          <h1>Create An Account</h1>
+          <h1>Add An User</h1>
           <div className="form-row">
             <div className="form-group col-md-4">
               <select 
@@ -104,8 +142,28 @@ export default function AddUser() {
             </div>
           </div>
           <button type="button" onClick={collectData} className="btn btn-primary" id="submitBtn">
-            Sign Up
+            Add
           </button>
         </form>
+        <div className="member-list">
+          <h2>List of all members</h2>
+          {
+            memberList.map((item)=>
+            <ul>
+              {item.title}. { }
+              {item.name}<br/>
+              {item.email}<br/>
+              {item.password}<br/>
+              {item.role}<br/>
+              {item.phone}<br/>
+              <button type="button"  id="deleteBtn">
+              <img src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/1.2.3/src/icon-trash-a.svg"  onClick={()=>DeleteUser(item._id)}/>
+          </button>
+            </ul>
+            )
+          }
+        </div>
+        </>
+        
       );
 }

@@ -2,10 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 export default function Navbar() {
-  let auth = localStorage.getItem("user");
-  if (!auth) {
-    auth = localStorage.getItem("token");
-  }
+  let auth = localStorage.getItem("token");
+  let authName = localStorage.getItem("name")
   const navigate = useNavigate();
   const logout = () => {
     localStorage.clear();
@@ -36,7 +34,7 @@ export default function Navbar() {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <Link className="text-link" to="/add">
+                  <Link className="text-link" to="/add/:adminId">
                     Add Member
                   </Link>
                 </li>
@@ -53,6 +51,7 @@ export default function Navbar() {
                     to="/logout"
                   >
                     Logout
+                    ({authName})
                   </Link>
                 </li>
               </ul>

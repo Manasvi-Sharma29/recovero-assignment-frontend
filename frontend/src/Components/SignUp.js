@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import {useNavigate} from 'react-router-dom'
 import "../Style/SignUp.css";
 import axios from 'axios'
+
+
 export default function SignUp() {
   const [title, setTitle] = useState("");
   const [name, setName] = useState("");
@@ -9,7 +11,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-
+  
   const navigate = useNavigate()
   useEffect(()=>{
     let auth = localStorage.getItem('user') 
@@ -18,8 +20,8 @@ export default function SignUp() {
     if(auth){
       navigate('/')
     }
-  })
-  
+  },[])
+
   const collectData = async ()=>{
     console.warn(title,name,phone,email,password,role)
     let obj = {
@@ -31,7 +33,9 @@ export default function SignUp() {
     }
     const result = await axios(obj)
     console.log(result.data)
-    localStorage.setItem("user",JSON.stringify(result))
+    localStorage.setItem("token",JSON.stringify(result.data.data.token))
+    localStorage.setItem("name",JSON.stringify(result.data.data.name))
+    localStorage.setItem("adminid",JSON.stringify(result.data.data.adminId))
     if(result){
       navigate('/')
     }
@@ -47,7 +51,7 @@ export default function SignUp() {
   }
   return (
     <form>
-      <h1>Create An Account</h1>
+      <h1>Sign Up</h1>
       <div className="form-row">
         <div className="form-group col-md-4">
           <select 

@@ -1,0 +1,35 @@
+.member-list{
+    margin-left:60%;
+    margin-top: -33%;
+}
+
+.member-list h2{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:dimgrey;
+    font-size:240%;
+}
+
+.member-list ul{
+    border-style: solid;
+    border-radius: 15px;
+    width: 200px;
+    border-color: slategrey;
+    background: slategrey;
+    color: whitesmoke;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#deleteBtn img{
+    margin-top: 15px;
+    width: 30px;
+    margin-bottom: 10px;
+    
+    margin-left: 400%;
+  
+}
+
+#deleteBtn{
+    border: none;
+    background: none;
+}
+

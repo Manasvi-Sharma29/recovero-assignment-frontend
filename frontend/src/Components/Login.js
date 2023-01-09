@@ -3,15 +3,15 @@ import '../Style/Login.css'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 export default function Login() {
-    const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(()=>{
     const auth = localStorage.getItem('token')
     if(auth){
       navigate('/')
     }
-  })
+  },[])
 
   const handleLogin = async (event)=>{
     event.preventDefault()
@@ -30,6 +30,8 @@ export default function Login() {
     }
     if(result){
         localStorage.setItem("token",JSON.stringify(result.data.data.token))
+        localStorage.setItem("name",JSON.stringify(result.data.data.name))
+        localStorage.setItem("adminid",JSON.stringify(result.data.data.adminId))
       navigate('/')
     }
   }
